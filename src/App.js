@@ -25,15 +25,44 @@ const firestore = firebase.firestore();
 
 function App() {
 
+  // signed in -> user is an object
+  // signed out -> user is null
   const [user] = userAuthState(auth);
 
   return (
+    // if user -> show ChatRoom, else -> show SignIn
     <div className="App">
       <header className="App-header">
         
       </header>
+
+      <section>
+        {user ? <ChatRoom /> : <SignIn />}
+      </section>
     </div>
   );
+}
+
+// Component that listens to click event and runs the function signInWithGoogle
+// instantiates provider (GoogleAuthProvider) and popup window on click event
+function SignIn() {
+
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  }
+
+  return (
+    <button onClick={signInWithGoogle}>Sign in with Google</button>
+  )
+
+}
+
+// Component that checks if there is a current user and returns Sign out button
+function SignOut() {
+  return auth.currentUser && (
+    <button onClick={() => auth.signOut()}>Sign Out</button>
+  )
 }
 
 export default App;
