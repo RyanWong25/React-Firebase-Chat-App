@@ -34,14 +34,14 @@ function App() {
     <div className="App">
 
       <header>
-       <h1>Ryan's Chat Room</h1>
+       <h1>🐟 FishBowl 🐟</h1>
        <SignOut />
       </header>
 
       <section>
         {user ? <ChatRoom /> : <SignIn />}
       </section>
-      
+
     </div>
   );
 }
@@ -56,7 +56,7 @@ function SignIn() {
   }
 
   return (
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
+    <button className="sign-in" onClick={signInWithGoogle}>Swim in with Google</button>
   )
 
 }
@@ -64,7 +64,7 @@ function SignIn() {
 // Component that checks if there is a current user and returns Sign out button
 function SignOut() {
   return auth.currentUser && (
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+    <button onClick={() => auth.signOut()}>Swim Out</button>
   )
 }
 
@@ -117,9 +117,9 @@ function ChatRoom() {
     
       <form onSubmit={sendMessage}>
         
-        <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+        <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Glug Glug..." />
 
-        <button type="submit">send</button>
+        <button type="submit">🐟</button>
 
       </form>
     </>

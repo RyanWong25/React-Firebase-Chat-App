@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Single ChatRoom (FishBowl) App
+
+Built a Single Chat Room web application with React and Firebase that can authenticate users using Google Sign-in provider, read chat messages and create new chat messages in a single chat room.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
