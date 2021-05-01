@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.css';
 
 // import firebase sdk, authentication, and firestore
@@ -32,13 +32,16 @@ function App() {
   return (
     // if user -> show ChatRoom, else -> show SignIn
     <div className="App">
-      <header className="App-header">
-        
+
+      <header>
+       <h1>Ryan's Chat Room</h1>
+       <SignOut />
       </header>
 
       <section>
         {user ? <ChatRoom /> : <SignIn />}
       </section>
+      
     </div>
   );
 }
@@ -67,6 +70,8 @@ function SignOut() {
 
 function ChatRoom() {
 
+  const dummy = useRef()
+
   // reference a firestore collection
   const messagesRef = firestore.collection('messages');
   // query documents in a collection
@@ -94,15 +99,21 @@ function ChatRoom() {
     });
 
     setFormValue('');
+
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
+
   }
 
   // loop over each document
   // use form to collect the user's message
   return (
     <>
-      <div>
+      <main>
         {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-      </div>
+      
+        <div ref={dummy}></div>
+
+      </main>
     
       <form onSubmit={sendMessage}>
         
