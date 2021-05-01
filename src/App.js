@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 // import firebase sdk, authentication, and firestore
@@ -27,7 +27,7 @@ function App() {
 
   // signed in -> user is an object
   // signed out -> user is null
-  const [user] = userAuthState(auth);
+  const [user] = useAuthState(auth);
 
   return (
     // if user -> show ChatRoom, else -> show SignIn
@@ -62,6 +62,73 @@ function SignIn() {
 function SignOut() {
   return auth.currentUser && (
     <button onClick={() => auth.signOut()}>Sign Out</button>
+  )
+}
+
+function ChatRoom() {
+
+  // reference a firestore collection
+  const messagesRef = firestore.collection('messages');
+  // query documents in a collection
+  const query = messagesRef.orderBy('createdAt').limit(25);
+
+  // listen to data with a useCollectionData hook
+  // reacts to changes in realtime
+  const [messages] = useCollectionData(query, {idField: 'id'});
+
+  // submit form to firestore to perform a write to the database
+  const [formValue, setFormValue] = useState('');
+
+  const sendMessage = async(e) => {
+    //prevent page refresh on event/form submit
+    e.preventDefault();
+    
+    const { uid, photoURL } = auth.currentUser; 
+
+    //create new document in firestore
+    await messagesRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      photoURL
+    });
+
+    setFormValue('');
+  }
+
+  // loop over each document
+  // use form to collect the user's message
+  return (
+    <>
+      <div>
+        {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
+      </div>
+    
+      <form onSubmit={sendMessage}>
+        
+        <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+
+        <button type="submit">send</button>
+
+      </form>
+    </>
+  )
+}
+
+// read chat messages
+function ChatMessage(props) {
+  
+  const { text, uid, photoURL } = props.message;
+
+  // conditional CSS, comparing user ID from firestore document to current user
+  // see if message is sent or received
+  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+
+  return (
+    <div className={`message ${messageClass}`}>
+      <img src={photoURL} />
+      <p>{text}</p>
+    </div>
   )
 }
 
