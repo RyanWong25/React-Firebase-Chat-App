@@ -4,7 +4,7 @@ Built a Single Chat Room web application with React and Firebase that can authen
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Web app is currently hosted through Firebase at: https://single-room-chat-app.web.app/.
+Web app is currently hosted through Firebase at: https://single-room-chat-app.firebaseapp.com/.
 
 ## Available Scripts
 
