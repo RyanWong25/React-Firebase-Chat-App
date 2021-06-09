@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './App.css';
 
 // import firebase sdk, authentication, and firestore
@@ -100,9 +100,11 @@ function ChatRoom() {
 
     setFormValue('');
 
-    dummy.current.scrollIntoView({ behavior: 'smooth' });
-
   }
+
+  useEffect(() => {
+    dummy.current.scrollIntoView({ behavior: 'smooth'});
+  }, [messages])
 
   // loop over each document
   // use form to collect the user's message
