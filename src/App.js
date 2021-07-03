@@ -11,13 +11,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCHxzPsfdOPekN3_XIkpIpflwD5AOCfUTQ",
-  authDomain: "single-room-chat-app.firebaseapp.com",
-  projectId: "single-room-chat-app",
-  storageBucket: "single-room-chat-app.appspot.com",
-  messagingSenderId: "847548066294",
-  appId: "1:847548066294:web:4997b5680988760c8e3fd7",
-  measurementId: "G-WHDN9DTK31"
+  apiKey: "AIzaSyC16X-5JguPPPr_rOiFvlqbFhYBz8DYVHg",
+  authDomain: "fishbowl-single-chatroom-app.firebaseapp.com",
+  projectId: "fishbowl-single-chatroom-app",
+  storageBucket: "fishbowl-single-chatroom-app.appspot.com",
+  messagingSenderId: "703058822401",
+  appId: "1:703058822401:web:bafdbf881e655b2bf04700",
+  measurementId: "G-01VJ1GLTEQ"
 })
 
 const auth = firebase.auth();
