@@ -121,7 +121,7 @@ function ChatRoom() {
         
         <input value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Glug Glug..." />
 
-        <button type="submit">🐟</button>
+        <button type="submit" disabled={!formValue}>🐟</button>
 
       </form>
     </>
